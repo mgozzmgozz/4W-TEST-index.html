@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4Ws Slot Machine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 24px;
+            cursor: pointer;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .slots-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 50px;
+            height: 300px;
+        }
+        .slot {
+            width: 300px;
+            height: 300px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .who {
+            background-color: blue;
+        }
+        .what {
+            background-color: green;
+        }
+        .where {
+            background-color: purple;
+        }
+        .when {
+            background-color: red;
+        }
+        .scroll {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            animation: spin 3.5s linear infinite;
+        }
+        @keyframes spin {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-100%);
+            }
+        }
+        .scroll div {
+            flex: 0 0 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>4Ws Slot Machine</h1>
+    <button onclick="generateSentence()">SPIN!</button>
+    <div class="slots-container">
+        <div class="slot who" id="who">-</div>
+        <div class="slot what" id="what">-</div>
+        <div class="slot where" id="where">-</div>
+        <div class="slot when" id="when">-</div>
+    </div>
+
+    <script>
+        const who = [
+            "A teacher", "A dog", "A student", "A firefighter", "A cat", "A doctor", "A chicken", "A musician", "A lion", "A panda", "A nurse", "A rabbit", "A writer", "A bear", "A pilot", "A zookeeper", "A tiger", "A dolphin", "A penguin", "A soldier", "A goat", "A chef", "A programmer", "A horse", "A bus driver", "A wolf", "A librarian", "A cow", "A sheep", "A lizard", "A fox", "A police officer", "A frog", "A whale", "A dancer", "An elephant", "A painter", "A fish", "A lawyer", "A monkey", "A hamster", "A snake", "A lawyer", "A turtle", "A squirrel"
+        ];
+
+        const what = [
+            "is reading", "is playing", "is sleeping", "is dancing", "is running", "is singing", "is cooking", "is writing", "is painting", "is teaching", "is learning", "is helping", "is walking", "is swimming", "is cycling", "is driving", "is laughing", "is talking", "is shouting", "is whispering", "is jumping", "is climbing", "is drawing", "is building", "is cleaning", "is organizing", "is traveling", "is exploring", "is shopping", "is exercising", "is cheering", "is relaxing", "is meditating", "is studying", "is playing soccer", "is running fast", "is eating", "is drinking", "is sleeping soundly"
+        ];
+
+        const where = [
+            "in the classroom", "at the park", "on the moon", "at home", "in the library", "at the beach", "in the kitchen", "on the road", "at the mall", "in the garden", "on the roof", "in the forest", "at the zoo", "in the hospital", "in the school", "on the field", "in the stadium", "at the station", "on the train", "in the car", "on the plane", "in the theater", "in the museum", "in the office", "in the factory", "on the boat", "in the pool", "on the bridge", "on the mountain", "in the village", "in the city", "at the market", "in the hotel", "at the restaurant", "on the bike", "in the yard", "in the basement", "in the attic", "on the farm", "on the trail", "at the campsite", "in the aquarium", "on the subway", "on the bus", "in the garage", "at the bus stop", "in the living room", "in the bedroom", "in the corridor"
+        ];
+
+        const when = [
+            "in the morning.", "at noon.", "in the evening.", "at midnight.", "during the day.", "at sunrise.", "at sunset.", "in the afternoon.", "before breakfast.", "after lunch.", "before dinner.", "after midnight.", "in the early morning.", "during the night.", "after school.", "before work.", "during the break.", "before the meeting.", "after the game.", "during the weekend.", "on Monday.", "on Tuesday.", "on Wednesday.", "on Thursday.", "on Friday.", "on Saturday.", "on Sunday.", "at the weekend.", "on a holiday.", "during the festival.", "on a rainy day.", "on a sunny day.", "on a snowy day.", "on a cloudy day.", "in the spring.", "in the summer.", "in the autumn.", "in the winter.", "on Christmas.", "on New Year’s Day.", "on my birthday.", "before the trip.", "after the celebration.", "during the ceremony.", "before the storm.", "after the rain.", "during the journey.", "at dawn.", "at dusk."
+        ];
+
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        function createScrollContent(array) {
+            return array.map(item => `<div>${item}</div>`).join('');
+        }
+
+        function spinSlot(elementId, array, delay) {
+            const slot = document.getElementById(elementId);
+            const scrollContent = `<div class="scroll">${createScrollContent(array)}</div>`;
+            slot.innerHTML = scrollContent;
+
+            setTimeout(() => {
+                const finalItem = getRandomItem(array);
+                slot.innerHTML = `<div>${finalItem}</div>`;
+            }, delay);
+        }
+
+        function generateSentence() {
+            spinSlot("who", who, 3500);
+            spinSlot("what", what, 3500);
+            spinSlot("where", where, 3500);
+            spinSlot("when", when, 3500);
+        }
+    </script>
+</body>
+</html>
